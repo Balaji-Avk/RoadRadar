@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Location {
+  pincode Int @id @unique
+  state String
+  district String
+  mandal String
+  poles Pole[]
+}
+
+model Pole {
+  id Int @id @default(autoincrement())
+  depth Int 
+  status String
+  breadth Int?
+  severity String
+  pincode Int
+  location Location @relation(fields:[pincode],references: [pincode])
+}
+
+model User{
+  username String @id @unique
+  email String
+  password String
+}

@@ -108,7 +108,6 @@ export async function updatePoleDetails(c:Context){
         const body:{
             id : number;
             status : string;
-            severity : string;
         } = await c.req.json();
 
         const response = await prisma.pole.update({
@@ -117,7 +116,6 @@ export async function updatePoleDetails(c:Context){
             },
             data:{
                 status : body.status,
-                severity : body.severity
             }
         });
 

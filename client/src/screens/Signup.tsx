@@ -9,19 +9,18 @@ import { useNavigate } from 'react-router-dom';
 
 export function Signup(){
     const navigate=useNavigate();
-    const [firstName,setFirstName]=useState('');
-    const [lastName,setLastName]=useState('');
-    const [username,setUsername]=useState('');
+    const [username,setUserName]=useState('');
+    const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
+
     const handleSignUp=async ()=>{
-        const response =  await axios.post("http://localhost:3000/api/v1/user/signup",{
-            firstName,
-            lastName,
+        const response =  await axios.post("https://roadradar.angarabalaji.workers.dev/api/user/signup",{
             username,
-            password
+            password,
+            email
         });
-        localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+        localStorage.setItem("token",response.data.token);
+        navigate("/home");
     }
     return(
         <div className='bg-gradient-to-r from-gray-50 to-red-50 h-screen flex justify-center'>
@@ -29,14 +28,12 @@ export function Signup(){
                 <div className='bg-white rounded-lg w-80 text-center p-2 h-max px-4 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]'>
                     <Heading label='Sign up'/>
                     <SubHeading label="Enter your information to create an account"/>
-                    <InputBox label="First Name" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                        setFirstName(e.target.value);
-                        }} placeholder="Robert" />
-                    <InputBox label="Last Name" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                        setLastName(e.target.value)
-                        }} placeholder="Downey" />
+                    <InputBox label="User Name" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                        setUserName(e.target.value);
+                        }} placeholder="Robert_Downey" />
+                    
                     <InputBox label="Email" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
-                        setUsername(e.target.value)
+                        setEmail(e.target.value)
                         }} placeholder="abc@example.com" />
                     <InputBox label="Password" onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
                         setPassword(e.target.value)
